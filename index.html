@@ -159,19 +159,19 @@
 
       // Handle keyboard controls
       document.addEventListener("keydown", function (e) {
-        var key = e.keyCode;
+        var key = e.key;
         var newDirection;
         switch (key) {
-          case 37: // Left
+          case "ArrowLeft":
             newDirection = "left";
             break;
-          case 38: // Up
+          case "ArrowUp":
             newDirection = "up";
             break;
-          case 39: // Right
+          case "ArrowRight":
             newDirection = "right";
             break;
-          case 40: // Down
+          case "ArrowDown":
             newDirection = "down";
             break;
           default:
