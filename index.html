@@ -1,184 +1,55 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Snake Game</title>
-    <style>
-      canvas {
-        border: 1px solid #000;
-        display: block;
-        margin: 0 auto;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Blog</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <script>
-      // Game variables
-      var canvas = document.getElementById("gameCanvas");
-      var ctx = canvas.getContext("2d");
-      var blockSize = 20;
-      var widthInBlocks = canvas.width / blockSize;
-      var heightInBlocks = canvas.height / blockSize;
-      var score = 0;
-      var snake;
-      var apple;
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to My Personal Blog</h1>
+      <p>Sharing my thoughts and experiences with the world.</p>
+    </div>
+  </section>
 
-      // Snake object
-      function Snake() {
-        this.segments = [[6, 4], [5, 4], [4, 4]];
-        this.direction = "right";
-        this.nextDirection = "right";
-      }
+  <!-- Blog Posts -->
+  <section class="blog-posts">
+    <div class="post">
+      <h2>Post Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque odio quis orci sagittis placerat. Curabitur maximus ipsum sit amet lorem lacinia vulputate.</p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+    <div class="post">
+      <h2>Post Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque odio quis orci sagittis placerat. Curabitur maximus ipsum sit amet lorem lacinia vulputate.</p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+    <div class="post">
+      <h2>Post Title</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque odio quis orci sagittis placerat. Curabitur maximus ipsum sit amet lorem lacinia vulputate.</p>
+      <a href="#" class="read-more">Read More</a>
+    </div>
+  </section>
 
-      Snake.prototype.draw = function () {
-        ctx.fillStyle = "#000";
-        for (var i = 0; i < this.segments.length; i++) {
-          var segment = this.segments[i];
-          drawBlock(segment[0], segment[1]);
-        }
-      };
-
-      Snake.prototype.move = function () {
-        var head = this.segments[0].slice();
-        switch (this.direction) {
-          case "right":
-            head[0] += 1;
-            break;
-          case "left":
-            head[0] -= 1;
-            break;
-          case "up":
-            head[1] -= 1;
-            break;
-          case "down":
-            head[1] += 1;
-            break;
-          default:
-            throw "Invalid direction";
-        }
-        this.segments.unshift(head);
-
-        if (isCollision(head, apple)) {
-          score++;
-          generateApple();
-        } else {
-          this.segments.pop();
-        }
-      };
-
-      Snake.prototype.setDirection = function (newDirection) {
-        if (this.direction === "up" && newDirection === "down") {
-          return;
-        } else if (this.direction === "down" && newDirection === "up") {
-          return;
-        } else if (this.direction === "right" && newDirection === "left") {
-          return;
-        } else if (this.direction === "left" && newDirection === "right") {
-          return;
-        }
-
-        this.nextDirection = newDirection;
-      };
-
-      function Apple() {
-        this.position = [10, 10];
-      }
-
-      Apple.prototype.draw = function () {
-        ctx.fillStyle = "#FF0000";
-        drawBlock(this.position[0], this.position[1]);
-      };
-
-      function drawBlock(x, y) {
-        var xPos = x * blockSize;
-        var yPos = y * blockSize;
-        ctx.fillRect(xPos, yPos, blockSize, blockSize);
-      }
-
-      function isCollision(head, other) {
-        return head[0] === other.position[0] && head[1] === other.position[1];
-      }
-
-      function checkCollision() {
-        var head = snake.segments[0];
-        var body = snake.segments.slice(1);
-        var wallCollision =
-          head[0] === 0 ||
-          head[0] === widthInBlocks - 1 ||
-          head[1] === 0 ||
-          head[1] === heightInBlocks - 1;
-        var selfCollision = body.some(function (segment) {
-          return segment[0] === head[0] && segment[1] === head[1];
-        });
-
-        return wallCollision || selfCollision;
-      }
-
-      function gameOver() {
-        clearInterval(gameLoop);
-        ctx.font = "30px Arial";
-        ctx.fillStyle = "#000";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
-      }
-
-      function generateApple() {
-        var x = Math.floor(Math.random() * (widthInBlocks - 2)) + 1;
-        var y = Math.floor(Math.random() * (heightInBlocks - 2)) + 1;
-        apple = new Apple();
-        apple.position = [x, y];
-      }
-
-      function gameLoop() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        snake.move();
-        snake.draw();
-        apple.draw();
-
-        if (checkCollision()) {
-          gameOver();
-        }
-
-        ctx.font = "20px Arial";
-        ctx.fillStyle = "#000";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "top";
-        ctx.fillText("Score: " + score, blockSize, blockSize);
-      }
-
-      function init() {
-        snake = new Snake();
-        generateApple();
-        var delay = 150;
-        setInterval(gameLoop, delay);
-      }
-
-      init();
-
-      // Handle keyboard controls
-      document.addEventListener("keydown", function (e) {
-        var key = e.key;
-        var newDirection;
-        switch (key) {
-          case "ArrowLeft":
-            newDirection = "left";
-            break;
-          case "ArrowUp":
-            newDirection = "up";
-            break;
-          case "ArrowRight":
-            newDirection = "right";
-            break;
-          case "ArrowDown":
-            newDirection = "down";
-            break;
-          default:
-            return;
-        }
-        snake.setDirection(newDirection);
-      });
-    </script>
-  </body>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 My Personal Blog. All rights reserved.</p>
+  </footer>
+</body>
 </html>
