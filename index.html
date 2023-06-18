@@ -3,53 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Personal Blog</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js"></script>
+  <title>Google Clone</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #search-form {
+      display: flex;
+      justify-content: center;
+      margin-top: 150px;
+    }
+
+    #search-input {
+      width: 500px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #search-btn {
+      padding: 10px 20px;
+      background-color: #f2f2f2;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <div id="search-form">
+    <input type="text" id="search-input" placeholder="Search Google">
+    <button id="search-btn">Search</button>
+  </div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Welcome to My Personal Blog</h1>
-      <p>Sharing my thoughts and experiences with the world.</p>
-    </div>
-  </section>
-
-  <!-- Blog Posts -->
-  <section class="blog-posts">
-    <div class="post">
-      <h2>Post Title</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque odio quis orci sagittis placerat. Curabitur maximus ipsum sit amet lorem lacinia vulputate.</p>
-      <a href="#" class="read-more">Read More</a>
-    </div>
-    <div class="post">
-      <h2>Post Title</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque odio quis orci sagittis placerat. Curabitur maximus ipsum sit amet lorem lacinia vulputate.</p>
-      <a href="#" class="read-more">Read More</a>
-    </div>
-    <div class="post">
-      <h2>Post Title</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque odio quis orci sagittis placerat. Curabitur maximus ipsum sit amet lorem lacinia vulputate.</p>
-      <a href="#" class="read-more">Read More</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2023 My Personal Blog. All rights reserved.</p>
-  </footer>
+  <script>
+    document.getElementById('search-btn').addEventListener('click', function() {
+      var searchQuery = document.getElementById('search-input').value;
+      alert('Performing search for: ' + searchQuery);
+    });
+  </script>
 </body>
 </html>
