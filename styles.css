@@ -1,37 +1,90 @@
-body {
-  background-color: #f2f2f2;
-  font-family: Arial, sans-serif;
+/* Reset default styles */
+body, h1, h2, p, ul, li {
   margin: 0;
-  padding: 20px;
+  padding: 0;
 }
 
-h1 {
-  color: #333;
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Header styles */
+header {
+  background-color: #333;
+  padding: 20px;
+  color: #fff;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Hero section styles */
+.hero {
+  background-color: #f2f2f2;
+  padding: 100px;
   text-align: center;
 }
 
-p {
-  color: #666;
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.hero p {
   font-size: 18px;
+  color: #888;
 }
 
-button {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+/* Blog posts styles */
+.blog-posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 50px;
 }
 
-button:hover {
-  background-color: #0056b3;
+.post {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
 }
 
-#text {
+.post h2 {
   font-size: 24px;
-  font-weight: bold;
-  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
+.post p {
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.read-more {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+/* Footer styles */
+footer {
+  background-color: #333;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+}
